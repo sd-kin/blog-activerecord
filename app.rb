@@ -15,6 +15,8 @@ belongs_to :post, inverse_of: :comments
 validates :comment_text, presence: true, length: {minimum: 3}
 end
 
+
+
 before do
 @posts=Post.order("updated_at DESC")
 end
@@ -46,11 +48,14 @@ end
 post '/posts/:id' do
 @current_post = Post.find(params[:id])
 comment=@current_post.comments.create params[:comment]
-@comments=@current_post.comments
+@comments=@current_post.comments(true)
 unless comment.valid? then 
 		@error=comment.errors.full_messages.uniq.join(", ")
 		return erb :post
-	else erb :post
+	else 
+		
+		erb :post
+		
 	end
 
 end

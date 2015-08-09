@@ -4,6 +4,7 @@
 
 <body>
 <p><%= @current_post.post_text%></p>
+
 <%@comments.each do |comment|%>
 <p><%=comment.comment_text%></p>
 <%end%>
